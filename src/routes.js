@@ -70,8 +70,9 @@ async function getTacos() {
 async function getAdresse() {
   try {
     const {data} = await axios.get('https://api-adresse.data.gouv.fr/search/?q=41+rue+du+port&postcode=59000&limit=1');
-    const adresse = data.features[0].geometry.coordinates;
-    return {lat : adresse[0] , lgn : adresse[1]};
+   // const adresse = data.features[0].geometry.coordinates;
+    var {features:[{geometry:{coordinates:[lat,lgn]}}]} = data ;
+    return { lat : lat , lgn : lgn};
   } catch (error) {
     return (error);
   }
